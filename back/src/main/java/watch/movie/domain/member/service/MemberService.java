@@ -3,6 +3,7 @@ package watch.movie.domain.member.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import watch.movie.base.RoleCode;
@@ -20,19 +21,24 @@ import java.util.List;
 public class MemberService {
 
     private final MemberJpaRepository jpaRepository;
+    private final PasswordEncoder passwordEncoder;
     private final MemberQueryRepository queryRepository;
 
     @Transactional
     public void join(MemberDto dto) {
         Member findMember = jpaRepository.findById(dto.getId()).orElse(null);
 
-        if (!ItemCheck.isNotEmpty(findMember)) {
+        if (!ItemCheck.isEmpty(findMember)) {
             throw new DuplicateKeyException("중복 아이디 발견");
         }
 
-        Member saveMember = Member.of(dto.getId(), dto.getName(), dto.getPassword(), dto.getBirthday());
+        Member saveMember = Member.of(dto.getId(), dto.getName(), passwordEncoder.encode(dto.getPassword()), dto.getBirthday());
 
         jpaRepository.save(saveMember);
+    }
+
+    public Member findById(String id) {
+        return jpaRepository.findById(id).orElse(null);
     }
 
     @Transactional

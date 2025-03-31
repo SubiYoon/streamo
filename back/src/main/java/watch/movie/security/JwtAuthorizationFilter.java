@@ -34,6 +34,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
 
+        // 토큰이 필요없는 경우 pass
+        if (request.getRequestURI().equals("/member/join")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         // 요청 Method가 Options의 경우 pass
         if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
             filterChain.doFilter(request, response);

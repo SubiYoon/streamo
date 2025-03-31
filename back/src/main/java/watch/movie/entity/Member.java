@@ -5,12 +5,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.domain.Persistable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import watch.movie.base.RoleCode;
 import watch.movie.entity.base.BaseEntity;
+import watch.movie.entity.base.BaseTimeEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +22,7 @@ import java.util.List;
 @Getter
 @Setter(AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member extends BaseEntity implements UserDetails, Persistable<String> {
+public class Member extends BaseTimeEntity implements UserDetails, Persistable<String> {
 
     @Id
     @Column(name = "member_id")
@@ -28,6 +30,9 @@ public class Member extends BaseEntity implements UserDetails, Persistable<Strin
     private String name;
     private String password;
     private String birthday;
+
+    @LastModifiedBy
+    private String updateBy;
 
     @Enumerated(EnumType.STRING)
     private RoleCode role;

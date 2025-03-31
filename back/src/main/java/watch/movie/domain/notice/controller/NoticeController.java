@@ -46,7 +46,7 @@ public class NoticeController {
     }
 
     @PutMapping("/notice/{id}")
-    public StatusCode updateNotice(@PathVariable("id") Long id, @ModelAttribute NoticeDto notice) {
+    public StatusCode updateNotice(@PathVariable("id") Long id, @RequestBody NoticeDto notice) {
         log.info("NoticeController.updateNotice -> {}", "공지사항 수정 : " + id);
 
         try {

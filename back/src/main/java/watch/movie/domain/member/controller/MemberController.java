@@ -5,13 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import watch.movie.base.AgeRatingCode;
 import watch.movie.base.RoleCode;
 import watch.movie.base.StatusCode;
 import watch.movie.domain.member.dto.MemberDto;
 import watch.movie.domain.member.service.MemberService;
-import watch.movie.entity.Member;
-import watch.movie.entity.Notice;
 
 import java.util.List;
 
@@ -30,7 +27,7 @@ public class MemberController {
     }
 
     @PostMapping("/member/join")
-    public StatusCode join(@ModelAttribute MemberDto dto) {
+    public StatusCode join(@RequestBody MemberDto dto) {
         log.info("MemberController.join -> {}", "회원가입 시도");
 
         try {

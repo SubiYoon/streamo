@@ -1,10 +1,12 @@
 package watch.movie.domain.member.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import watch.movie.base.RoleCode;
 import watch.movie.entity.Member;
 
 @Data
+@NoArgsConstructor
 public class MemberDto {
 
     private String id;
