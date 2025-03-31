@@ -12,7 +12,7 @@ import watch.movie.entity.Member;
 
 @Component
 @RequiredArgsConstructor
-public class ProfileAuthenticationProvider implements AuthenticationProvider {
+public class DevstatAuthenticationProvider implements AuthenticationProvider {
 
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
@@ -30,11 +30,11 @@ public class ProfileAuthenticationProvider implements AuthenticationProvider {
 
         member.changePassword(null);
 
-        return new ProfileAuthenticationToken(member, loginPwd, member.getAuthorities());
+        return new DevstatAuthenticationToken(member, loginPwd, member.getAuthorities());
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return authentication.equals(ProfileAuthenticationToken.class);
+        return authentication.equals(DevstatAuthenticationToken.class);
     }
 }

@@ -17,8 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
-import watch.movie.security.ErrorCode;
-import watch.movie.security.ProfileException;
 import watch.movie.utility.ItemCheck;
 import watch.movie.utility.JwtUtil;
 
@@ -47,7 +45,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         String token = null;
         if (ItemCheck.isNotEmpty(cookies)) {
             for (Cookie cookie : cookies) {
-                if ("PROFILE-JWT".equals(cookie.getName())) {
+                if ("DEVSTAT-JWT".equals(cookie.getName())) {
                     token = cookie.getValue();
                     break;
                 }
@@ -65,9 +63,9 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                         filterChain.doFilter(request, response);
-                    } else throw new ProfileException(ErrorCode.USER_NOT_FOUND);
-                } else throw new ProfileException(ErrorCode.TOKEN_NOT_VALID);
-            }else throw new ProfileException(ErrorCode.TOKEN_NOT_FOUND);
+                    } else throw new DevstatException(ErrorCode.USER_NOT_FOUND);
+                } else throw new DevstatException(ErrorCode.TOKEN_NOT_VALID);
+            }else throw new DevstatException(ErrorCode.TOKEN_NOT_FOUND);
         } catch (Exception e) {
 
             // Client에게 인증 실패시 보낼 Message
@@ -79,7 +77,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
             objectMapper.writeValue(response.getWriter(), tokenErrorTrace(e));
 
-            Cookie jwt = new Cookie("PROFILE-JWT", null);
+            Cookie jwt = new Cookie("DEVSTAT-JWT", null);
             jwt.setMaxAge(0);
             jwt.setPath("/");
             response.addCookie(jwt);

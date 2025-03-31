@@ -7,14 +7,14 @@ import org.springframework.util.Assert;
 
 import java.util.Collection;
 
-public class ProfileAuthenticationToken extends AbstractAuthenticationToken {
+public class DevstatAuthenticationToken extends AbstractAuthenticationToken {
 
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
     private final Object principal;
     private Object credentials;
 
     // 인증 전 생성자
-    public ProfileAuthenticationToken(Object principal, Object credentials){
+    public DevstatAuthenticationToken(Object principal, Object credentials){
         super(null);
         this.principal = principal;
         this.credentials = credentials;
@@ -22,7 +22,7 @@ public class ProfileAuthenticationToken extends AbstractAuthenticationToken {
     }
 
     // 인증 후 생성자
-    public ProfileAuthenticationToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities){
+    public DevstatAuthenticationToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities){
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;

@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 @Component
-public class ProfileLogoutSuccessHandler implements LogoutSuccessHandler {
+public class DevstatLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         try (PrintWriter writer = response.getWriter()){

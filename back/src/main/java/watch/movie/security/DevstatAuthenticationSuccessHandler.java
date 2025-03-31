@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 @Slf4j
 @Component
-public class ProfileAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class DevstatAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -44,7 +44,7 @@ public class ProfileAuthenticationSuccessHandler implements AuthenticationSucces
         jsonObject.put("token", token);
 
         // 쿠키에 토큰 저장
-        Cookie jwtCookie = new Cookie("PROFILE-JWT", token);
+        Cookie jwtCookie = new Cookie("DEVSTAT-JWT", token);
         jwtCookie.setHttpOnly(true); // JavaScript에서 쿠키 접근 할 수 없도록 설정
         jwtCookie.setPath("/"); // 모든경로에서 쿠키 접근할 수 있게 설정
         response.addCookie(jwtCookie);

@@ -38,11 +38,11 @@ public class SecurityConfig {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
-    private final ProfileAuthenticationSuccessHandler profileAuthenticationSuccessHandler;
-    private final ProfileAuthenticationFailureHandler profileAuthenticationFailureHandler;
-    private final ProfileLoginAuthenticationEntryPoint profileAuthenticationEntryPoint;
+    private final DevstatAuthenticationSuccessHandler devstatAuthenticationSuccessHandler;
+    private final DevstatAuthenticationFailureHandler devstatAuthenticationFailureHandler;
+    private final DevstatLoginAuthenticationEntryPoint profileAuthenticationEntryPoint;
     private final AuthenticationConfiguration authenticationConfiguration;
-    private final ProfileAccessDeniedHandler profileAccessDeniedHandler;
+    private final DevstatAccessDeniedHandler devstatAccessDeniedHandler;
 
     /**
      * Spring Security 설정
@@ -61,7 +61,7 @@ public class SecurityConfig {
                 //인증 인가가 필요한 URL을 지정
                 .authorizeHttpRequests(requests -> requests
                         //특정 패턴의 URL 인증이 필요함을 표시(authenticated())
-                        .requestMatchers(HttpMethod.POST).authenticated()
+//                        .requestMatchers(HttpMethod.POST).authenticated()
                         .requestMatchers(HttpMethod.DELETE).authenticated()
                         .requestMatchers(HttpMethod.PUT).authenticated()
                         //나머지 요청은 전부 허용
@@ -72,22 +72,22 @@ public class SecurityConfig {
                 .addFilterBefore(ajaxAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(config -> config
                         .authenticationEntryPoint(profileAuthenticationEntryPoint)
-                        .accessDeniedHandler(profileAccessDeniedHandler))
+                        .accessDeniedHandler(devstatAccessDeniedHandler))
                 .logout(logout -> logout.logoutUrl("/logout")
-                        .addLogoutHandler(new ProfileLogoutHandler())
-                        .logoutSuccessHandler(new ProfileLogoutSuccessHandler()));
+                        .addLogoutHandler(new DevstatLogoutHandler())
+                        .logoutSuccessHandler(new DevstatLogoutSuccessHandler()));
 
         return httpSecurity.build();
     }
 
     @Bean
-    public ProfileAuthenticateionFilter ajaxAuthenticationFilter() throws Exception {
-        ProfileAuthenticateionFilter profileAuthenticateionFilter = new ProfileAuthenticateionFilter();
-        profileAuthenticateionFilter.setAuthenticationManager(authenticationConfiguration.getAuthenticationManager());
-        profileAuthenticateionFilter.setAuthenticationSuccessHandler(profileAuthenticationSuccessHandler);
-        profileAuthenticateionFilter.setAuthenticationFailureHandler(profileAuthenticationFailureHandler);
-        profileAuthenticateionFilter.afterPropertiesSet();
-        return profileAuthenticateionFilter;
+    public DevstatAuthenticateionFilter ajaxAuthenticationFilter() throws Exception {
+        DevstatAuthenticateionFilter devstatAuthenticateionFilter = new DevstatAuthenticateionFilter();
+        devstatAuthenticateionFilter.setAuthenticationManager(authenticationConfiguration.getAuthenticationManager());
+        devstatAuthenticateionFilter.setAuthenticationSuccessHandler(devstatAuthenticationSuccessHandler);
+        devstatAuthenticateionFilter.setAuthenticationFailureHandler(devstatAuthenticationFailureHandler);
+        devstatAuthenticateionFilter.afterPropertiesSet();
+        return devstatAuthenticateionFilter;
     }
 
     @Bean JwtAuthorizationFilter jwtAuthorizationFilter() {

@@ -18,6 +18,19 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
     @Bean
     public AuditorAware<String> auditorProvider() {
+        // null값 허용
+        /*
+        return new AuditorAware<String>() {
+            @Override
+            public Optional<String> getCurrentAuditor() {
+                return Optional.ofNullable(
+                        SecurityContextHolder.getContext().getAuthentication() != null
+                                ? SecurityContextHolder.getContext().getAuthentication().getName()
+                                : null
+                );
+            }
+        };
+        */
         return new AuditorAware<String>() {
             @Override
             public Optional<String> getCurrentAuditor() {

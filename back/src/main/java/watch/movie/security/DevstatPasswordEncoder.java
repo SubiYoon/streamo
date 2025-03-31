@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.security.MessageDigest;
 
 @Component
-public class ProfilePasswordEncoder implements PasswordEncoder {
+public class DevstatPasswordEncoder implements PasswordEncoder {
     @Override
     public String encode(CharSequence rawPassword) {
         MessageDigest md = null;

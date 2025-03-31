@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 @Slf4j
 @Component
-public class ProfileAuthenticationFailureHandler implements AuthenticationFailureHandler {
+public class DevstatAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {

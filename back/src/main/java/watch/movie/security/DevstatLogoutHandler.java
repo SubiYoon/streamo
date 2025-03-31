@@ -8,11 +8,11 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProfileLogoutHandler implements LogoutHandler {
+public class DevstatLogoutHandler implements LogoutHandler {
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         // JWT 토큰을 저장하고 있는 쿠키 삭제
-        Cookie jwtCookie = new Cookie("PROFILE-JWT", null);
+        Cookie jwtCookie = new Cookie("DEVSTAT-JWT", null);
         jwtCookie.setMaxAge(0);
         jwtCookie.setPath("/");
         response.addCookie(jwtCookie);

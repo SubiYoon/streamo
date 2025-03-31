@@ -12,7 +12,7 @@ import watch.movie.utility.ItemCheck;
 
 @Service
 @RequiredArgsConstructor
-public class ProfileUserDetailService implements UserDetailsService {
+public class DevstatUserDetailService implements UserDetailsService {
 
     @Autowired
     private MemberJpaRepository memberJpaRepository;

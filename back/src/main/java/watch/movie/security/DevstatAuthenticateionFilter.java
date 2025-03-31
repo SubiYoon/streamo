@@ -12,11 +12,11 @@ import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 
-public class ProfileAuthenticateionFilter extends AbstractAuthenticationProcessingFilter {
+public class DevstatAuthenticateionFilter extends AbstractAuthenticationProcessingFilter {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public ProfileAuthenticateionFilter(){
+    public DevstatAuthenticateionFilter(){
         // 로그인 시도시에 필터 동작
         super(new AntPathRequestMatcher("/login"));
     }
@@ -35,7 +35,7 @@ public class ProfileAuthenticateionFilter extends AbstractAuthenticationProcessi
         }
 
         // 토큰생성
-        ProfileAuthenticationToken token = new ProfileAuthenticationToken(
+        DevstatAuthenticationToken token = new DevstatAuthenticationToken(
                 accountVo.getName(),
                 accountVo.getPassword()
         );

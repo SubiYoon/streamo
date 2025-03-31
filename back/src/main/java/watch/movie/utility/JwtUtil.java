@@ -41,7 +41,7 @@ public class JwtUtil {
                 .setHeader(createHeader())                      // Header 구성
                 .setClaims(createClaims(member))                // payload - Claims 구성
                 .setSubject(String.valueOf(member.getName()))  // payload - Subject 구성
-                .setIssuer("profile")                           // Issuer 구성
+                .setIssuer("devstat")                           // Issuer 구성
                 .signWith(key, SignatureAlgorithm.HS256)        // Signature 구성
                 .setExpiration(createExpiredDate());            // Token 만료일 구성
         return builder.compact();
